@@ -1,0 +1,64 @@
+.App {
+  text-align: center;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+form {
+  margin: 20px;
+  padding: 20px;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  color: #333;
+}
+
+input, select, button {
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  width: 80%;
+}
+
+button {
+  background-color: #4CAF50;
+  color: white;
+  cursor: pointer;
+  width: auto;
+  padding: 10px 20px;
+}
+
+button:disabled {
+  background-color: #ccc;
+}
+
+label {
+  float: left;
+  width: 100%;
+  text-align: left;
+}
+.submission-result {
+  margin-top: 20px;
+  padding: 20px;
+  background: #f0f0f0;
+  border-radius: 8px;
+  color: #333;
+  text-align: left;
+  width: 80%;
+  max-width: 600px;
+}
+
+.submission-result pre {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
