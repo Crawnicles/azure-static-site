@@ -109,17 +109,37 @@ function App() {
       console.error('Error:', error);
       alert('An error occurred while submitting the form to Azure.');
     });
-    */
+    
+
+    const handleSubmit = async (event) => {
+      event.preventDefault();
+      const submissionData = { ...formData };
+      // Convert quantities to integers as needed, and any other processing
+    
+      try {
+        const response = await axios.post('https://<appname>.azurewebsites.net/api/getLog', submissionData, {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+        console.log(response.data);
+        alert('Form submitted successfully!');
+      } catch (error) {
+        console.error('Error:', error);
+        alert('An error occurred while submitting the form.');
+      }
+    };*/
 
 
 
-
+/*
   const handleSubmit = async (event) => {
     event.preventDefault();
       const formData = new FormData(event.target);
+      const response = await axios.post('https://<appname>.azurewebsites.net/api/getLog', formData);
       const response = await axios.post('https://adtech-form.azurewebsites.net/api/getLog', formData);
       console.log(response.data);
-  };
+  };*/
 
 
     
