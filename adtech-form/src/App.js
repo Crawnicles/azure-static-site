@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
+import axios from 'axios';
 
 function App() {
   const initialFormState = {
@@ -88,6 +89,40 @@ function App() {
     alert('Form saved to local storage!');
     setLastSubmission(submissionData); // Update UI with submitted data
     setFormData(initialFormState); // Reset form data after submission
+
+    // TODO: Send the submissionData to the Azure Function which will handle the data.
+    // Example (commented out):
+    /*
+    fetch('YOUR_AZURE_FUNCTION_URL', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(submissionData),
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Success:', data);
+      alert('Form submitted successfully to Azure!');
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+      alert('An error occurred while submitting the form to Azure.');
+    });
+    */
+
+
+
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+      const formData = new FormData(event.target);
+      const response = await axios.post('https://adtech-form.azurewebsites.net/api/getLog', formData);
+      console.log(response.data);
+  };
+
+
+    
   };
 
   return (
