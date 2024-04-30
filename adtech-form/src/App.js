@@ -79,7 +79,7 @@ function App() {
   event.preventDefault();
 
   try {
-    const response = await fetch('http://localhost:7071/api/getlog', {
+    const response = await fetch('http://localhost:7071/api/getLog', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/raw'
