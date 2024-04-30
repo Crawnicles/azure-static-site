@@ -79,20 +79,20 @@ function App() {
   event.preventDefault();
 
   try {
-    const response = await fetch('http://localhost:7071/api/getLog', {
+    const response = await fetch('/api/getLog', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/raw'
+        'Content-Type': 'application/json'
       },
-      body: JSON.stringify(formData)
+      body: formData
     });
 
     if (!response.ok) {
       throw new Error('Failed to submit form');
     }
 
-    const responseData = await response;
-    console.log('Form submitted successfully:', responseData);
+    // const responseData = await response;
+    console.log('Form submitted successfully:', response);
     setLastSubmission(formData);
     setFormData({
       name: '',
