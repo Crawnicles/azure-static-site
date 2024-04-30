@@ -82,7 +82,7 @@ function App() {
     const response = await fetch('http://localhost:7071/api/getlog', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/raw'
       },
       body: JSON.stringify(formData)
     });
@@ -91,7 +91,7 @@ function App() {
       throw new Error('Failed to submit form');
     }
 
-    const responseData = await response.json();
+    const responseData = await response;
     console.log('Form submitted successfully:', responseData);
     setLastSubmission(formData);
     setFormData({
