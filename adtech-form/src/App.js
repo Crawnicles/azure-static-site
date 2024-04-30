@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 
+
 function App() {
   const initialFormState = {
     name: '',
@@ -73,76 +74,42 @@ function App() {
     setMachiningPauseTime(null);
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const submissionData = { ...formData };
 
-    if (submissionData.quantity === '') {
-      submissionData.quantity = null;
-    } else {
-      submissionData.quantity = parseInt(submissionData.quantity, 10);
-    }
+  const handleSubmit = async (event) => {
+  event.preventDefault();
 
-    // Save to local storage
-    localStorage.setItem('machinistLog', JSON.stringify(submissionData));
-    alert('Form saved to local storage!');
-    setLastSubmission(submissionData); // Update UI with submitted data
-    setFormData(initialFormState); // Reset form data after submission
-
-    // TODO: Send the submissionData to the Azure Function which will handle the data.
-    // Example (commented out):
-    /*
-    fetch('YOUR_AZURE_FUNCTION_URL', {
+  try {
+    const response = await fetch('http://localhost:7071/api/getlog', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/raw'
       },
-      body: JSON.stringify(submissionData),
-    })
-    .then(response => response.json())
-    .then(data => {
-      console.log('Success:', data);
-      alert('Form submitted successfully to Azure!');
-    })
-    .catch((error) => {
-      console.error('Error:', error);
-      alert('An error occurred while submitting the form to Azure.');
+      body: JSON.stringify(formData)
     });
-    
 
-    const handleSubmit = async (event) => {
-      event.preventDefault();
-      const submissionData = { ...formData };
-      // Convert quantities to integers as needed, and any other processing
-    
-      try {
-        const response = await axios.post('https://<appname>.azurewebsites.net/api/getLog', submissionData, {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        });
-        console.log(response.data);
-        alert('Form submitted successfully!');
-      } catch (error) {
-        console.error('Error:', error);
-        alert('An error occurred while submitting the form.');
-      }
-    };*/
+    if (!response.ok) {
+      throw new Error('Failed to submit form');
+    }
 
-
-
-/*
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-      const formData = new FormData(event.target);
-      const response = await axios.post('https://<appname>.azurewebsites.net/api/getLog', formData);
-      const response = await axios.post('https://adtech-form.azurewebsites.net/api/getLog', formData);
-      console.log(response.data);
-  };*/
-
-
-    
-  };
+    const responseData = await response;
+    console.log('Form submitted successfully:', responseData);
+    setLastSubmission(formData);
+    setFormData({
+      name: '',
+      machine: '',
+      date: '',
+      workOrder: '',
+      serialNumber: '',
+      partNumber: '',
+      quantity: '',
+      notes: '',
+      setupTime: '00:00:00',
+      machiningTime: '00:00:00'
+    });
+  } catch (error) {
+    console.error('Error submitting form:', error);
+  }
+};
 
   return (
     <div className="App">
