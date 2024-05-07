@@ -6,7 +6,7 @@ function App() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const response = await fetch('/api/getLog', {
+    const response = await fetch('https://gentle-rock-098dd0e10.5.azurestaticapps.net/api/getLog', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

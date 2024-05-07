@@ -12,10 +12,16 @@ module.exports = async function (context, req) {
     Email: req.body.email
   };
 
-  await tableClient.createEntity(formData);
-
-  context.res = {
-    status: 200, // Status code for success
-    body: "Data saved successfully!"
-  };
+  try {
+    await tableClient.createEntity(formData);
+    context.res = {
+      status: 200,
+      body: "Data saved successfully"
+    };
+  } catch (error) {
+    context.res = {
+      status: 500,
+      body: `Error saving data: ${error.message}`
+    };
+  }
 };
