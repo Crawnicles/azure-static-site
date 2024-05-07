@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function MyForm() {
+function App() {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
 
