@@ -25,3 +25,5 @@ function MyForm() {
     </form>
   );
 }
+
+export default App;
