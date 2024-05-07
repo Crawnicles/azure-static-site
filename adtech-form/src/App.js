@@ -13,9 +13,17 @@ function App() {
       },
       body: JSON.stringify({ username, email })
     });
-    const data = await response.json();
+
+    if (!response.ok) {
+      const errorResponse = await response.text(); // Assuming error as plain text
+      console.error('Failed to fetch:', errorResponse);
+      return; // Exit the function or handle error appropriately
+    }
+
+    const data = await response.json(); // Only parse JSON if response is OK
     console.log(data);
   };
+
 
   return (
     <form onSubmit={handleSubmit}>

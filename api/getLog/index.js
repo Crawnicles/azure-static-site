@@ -21,7 +21,9 @@ module.exports = async function (context, req) {
   } catch (error) {
     context.res = {
       status: 500,
-      body: `Error saving data: ${error.message}`
+      body: JSON.stringify({ error: `Error saving data: ${error.message}` })
     };
+    
   }
+  
 };
