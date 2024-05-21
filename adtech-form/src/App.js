@@ -28,7 +28,7 @@ function App() {
   return (
     <form onSubmit={handleSubmit}>
       <input type="text" value={username} onChange={e => setUsername(e.target.value)} placeholder="Username" />
-      <input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="Email" />
+      <input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="Emailll" />
       <button type="submit">Submit</button>
     </form>
   );
